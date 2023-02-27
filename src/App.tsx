@@ -1,23 +1,15 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {LocationSearch} from "./LocationSearch";
 function App() {
-  const [locationSearch, setLocationSearch] = useState('')
   const [locations, setLocations] = useState<string[]>([])
-  const disableSearch = locationSearch.trim() === ''
-  const addLocation = () => {
-    setLocations([locationSearch, ...locations])
-    setLocationSearch('')
-  }
+  const addLocation = (location:string) => setLocations([location,...locations])
+
   return (
     <div className='container'>
       <h1>Weather App</h1>
-      <div>
-        <label htmlFor="">
-          Add Location
-          <input className="ml-1 mr-1" type="text" value={locationSearch} onChange={e => setLocationSearch(e.target.value)}/>
-        </label>
-        <button className="btn btn-primary" onClick={addLocation} disabled={disableSearch}>Search</button>
-      </div>
+
+      <LocationSearch onSearch={addLocation}/>
 
       <div>
         <h2>Locations</h2>
